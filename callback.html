@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Drashta — TikTok auth callback</title></head>
+<body style="font-family: monospace; padding: 2rem;">
+  <h2>Copy this code back into your terminal:</h2>
+  <pre id="code" style="font-size: 1.2rem; background: #eee; padding: 1rem;"></pre>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('code').textContent = params.get('code') || '(no code found in URL)';
+  </script>
+</body>
+</html>
