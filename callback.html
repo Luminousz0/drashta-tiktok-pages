@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Drashta — TikTok auth callback</title></head>
-<body style="font-family: monospace; padding: 2rem;">
-  <h2>Copy this code back into your terminal:</h2>
-  <pre id="code" style="font-size: 1.2rem; background: #eee; padding: 1rem;"></pre>
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Drashta — TikTok callback</title></head>
+<body style="font:16px/1.5 system-ui,sans-serif;max-width:620px;margin:4rem auto;padding:0 1rem">
+  <h1>Finishing secure connection…</h1>
+  <p id="status">Passing the authorization response to the local Drashta publisher.</p>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    document.getElementById('code').textContent = params.get('code') || '(no code found in URL)';
+    const query = window.location.search;
+    const params = new URLSearchParams(query);
+    const status = document.getElementById('status');
+    if (params.get('code') && params.get('state')) {
+      window.location.replace(`http://127.0.0.1:8765/oauth/callback${query}`);
+    } else {
+      status.textContent = `TikTok did not return an authorization code: ${params.get('error_description') || params.get('error') || 'unknown error'}.`;
+    }
   </script>
 </body>
 </html>
